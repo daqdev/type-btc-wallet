@@ -100,7 +100,7 @@
         display: flex;
     }
 
-    #result {
+    #results {
         display: none;
     }
 
@@ -140,14 +140,15 @@
 <body>
     <main>
         <section id="game">
+            <h1>Type a Bitcoin wallet in 24 secs</h1>
             <time></time>
             <p></p>
             <input autofocus />
         </section>
         <section id="results">
-            <h2>palabras por minuto</h2>
+            <h2>Lo lograste?</h2>
             <h3></h3>
-            <h2>precisión</h2>
+            <h2>Completaste el</h2>
             <h3></h3>
             <button id="btn-reload"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -176,7 +177,7 @@
     const $button = document.querySelector('#btn-reload')
     let intervalId = null;
 
-    const INITIAL_TIME = 20;
+    const INITIAL_TIME = 24;
 
     let words = [];
     let currTime = INITIAL_TIME;
@@ -335,8 +336,13 @@
             correctLetters * 100 / totalLetters :
             0
         const wpm = correctWords / (INITIAL_TIME / 60)
-        $wpm.textContent = wpm
-        $accurracy.textContent = `${accurracy.toFixed(2)}%`
+        // $wpm.textContent = wpm
+
+        const percReached = correctWords*100/24;
+        const madeit = correctWords.length===24
+        $wpm.textContent = madeit?'Lo lograste!!':'Nope, seguí practicando:)'
+
+        $accurracy.textContent = `${percReached.toFixed(2)}%`
 
     }
 </script>
